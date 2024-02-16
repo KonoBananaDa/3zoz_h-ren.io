@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hören By Azzouz</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://cdn.dribbble.com/userupload/6508149/file/original-c4197a5bf25a4356aa2bac6f82073eb2.jpg?resize=752x');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent black */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1; /* Ensure header is above other content */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        main {
+            padding: 20px;
+            padding-top: 100px; /* Adjusted padding to move content below the header */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 150px); /* Adjusted height to account for header and footer */
+        }
+
+        #quiz {
+            background-image: url('https://cdn.dribbble.com/users/2101653/screenshots/5650189/media/a59a3d993244ed6b0c1d9a40cc330b7d.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%; /* Adjust width as needed */
+            max-width: 600px; /* Limit maximum width */
+            margin-top: -50px; /* Move the quiz section up */
+        }
+
+        #question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #ffffff; /* White text color */
+        }
+
+        #options {
+            margin-bottom: 20px;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            color: white; /* White color for correct answer feedback */
+        }
+
+        button {
+            background-color: #8a2be2; /* Mauve color */
+            color: white;
+            padding: 12px 24px; /* Increase padding */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px; /* Increase font size */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #6a1b9a; /* Darker mauve color on hover */
+            opacity: 0.8;
+        }
+
+        footer {
+            background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent black */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1; /* Ensure footer is above other content */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://m.media-amazon.com/images/I/81LQ9oxSV5L._UF1000,1000_QL80_.jpg" alt="Website Icon" width="50px" height="50px">
+        <h1>Hören By Azzouz</h1>
+    </header>
+    <main>
+        <section id="quiz">
+            <div id="question"></div>
+            <div id="options"></div>
+            <button id="submit">Antwort einreichen</button>
+            <div id="feedback"></div>
+        </section>
+    </main>
+    <footer>
+        <p>Mehr | <a href="https://www.instagram.com/ucka._.ucka?igsh=Y2Rib3NxMnhwMmd6">ucka._.ucka</a></p>
+        <p>Ich Beobachte dich ૮・ᴥ・ა</p>
+    </footer>
+
+    <script>
+        const quizData = [
+            { question: 'Thurnherr', answer: '124570' },
+            { question: 'bachinger', answer: '1459' },
+            { question: 'Frau Reiter', answer: '35680' },
+            { question: 'touristen', answer: '1459' },
+            { question: 'Wallner-Calletti', answer: '2480' },
+            { question: 'Praktikum', answer: '257890' },
+            { question: 'nordsee', answer: '24789' },
+            { question: 'UKI', answer: '345678' },
+            { question: 'Frau wenger', answer: '2457' },
+            { question: 'Herr schütz', answer: '2479' },
+            { question: 'kranke', answer: '12478' },
+            { question: 'frau schäfer', answer: '35678' },
+            { question: 'Kino', answer: '12368' },
+            { question: 'einkäufe im Internet + Innenstadt', answer: '13' },
+            { question: 'Computer+Ingolstadt+ Arbeit zu fahren', answer: '34' },
+            { question: 'die Sprecherin bus zur Arbeit+ Norddeutschland', answer: '23' },
+            { question: 'in der Schule+Einzelkind+kinder+Fremdsprache+Hauptbahnhof+nrbrls', answer: '245' },
+            { question: 'Urlaub+Sport als für Kultur', answer: '125' },
+            { question: 'bus zur arbeit', answer: '3' },
+            { question: 'die Sprecherin', answer: '234' },
+            { question: 'Radwege', answer: '145' },
+            { question: 'einkäufe im Internet', answer: '13' },
+            { question: 'Innenstadt', answer: '13' },
+            { question: 'Computer', answer: '34' },
+            { question: 'Ingolstadt', answer: '34' },
+            { question: 'arbeit zu fahren', answer: '34' },
+            { question: 'die Sprecherin bus zur Arbeit', answer: '23' },
+            { question: 'Norddeutschland', answer: '23' },
+            { question: 'in der Schule', answer: '245' },
+            { question: 'Einzelkind', answer: '245' },
+            { question: 'Fremdsprache', answer: '245' },
+            { question: 'nebels', answer: '245' },
+            { question: 'Hauptbahnhof', answer: '245' },
+            { question: 'kinder', answer: '245' },
+            { question: 'Urlaub', answer: '125' },
+            { question: 'sport als für Kultur', answer: '125' }
+        ];
+
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const feedbackElement = document.getElementById('feedback');
+        const submitButton = document.getElementById('submit');
+
+        let shuffledQuizData = shuffle(quizData); // Shuffle the quiz data initially
+        let currentQuestionIndex = 0;
+        let incorrectAnswers = 0;
+
+        // Load initial question
+        loadQuestion();
+
+        function loadQuestion() {
+            const currentQuestion = shuffledQuizData[currentQuestionIndex];
+            questionElement.innerText = currentQuestion.question;
+
+            optionsElement.innerHTML = '';
+            const answerInput = document.createElement('input');
+            answerInput.setAttribute('type', 'text');
+            answerInput.setAttribute('id', 'answerInput');
+            optionsElement.appendChild(answerInput);
+        }
+
+        submitButton.addEventListener('click', () => {
+            const userAnswer = document.getElementById('answerInput').value.trim();
+            const correctAnswer = shuffledQuizData[currentQuestionIndex].answer;
+            
+            if (userAnswer === correctAnswer) {
+                feedbackElement.innerText = 'Richtig!';
+                questionElement.classList.add('correct');
+            } else {
+                feedbackElement.innerText = 'Falsch. Die richtige Antwort ist: ' + correctAnswer;
+                questionElement.classList.add('incorrect');
+                incorrectAnswers++; // Increment incorrect answers count
+            }
+            
+            submitButton.disabled = true;
+
+            if (currentQuestionIndex < shuffledQuizData.length - 1) {
+                currentQuestionIndex++;
+                setTimeout(() => {
+                    loadQuestion();
+                    feedbackElement.innerText = '';
+                    questionElement.classList.remove('correct', 'incorrect');
+                    submitButton.disabled = false;
+                }, 1500); // 2 seconds delay before loading the next question
+            } else {
+                showResults(); // Call function to display results
+            }
+        });
+
+        // Fisher-Yates (aka Knuth) Shuffle algorithm
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function to reset quiz
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            shuffledQuizData = shuffle(quizData);
+            incorrectAnswers = 0;
+            loadQuestion();
+        }
+
+        // Load initial question
+        loadQuestion();
+
+        // Display completion message and results
+        function showResults() {
+            const totalQuestions = shuffledQuizData.length;
+            const correctAnswers = totalQuestions - incorrectAnswers;
+            const resultMessage = `Sie haben das Quiz abgeschlossen! Sie haben ${correctAnswers} von ${totalQuestions} Fragen richtig beantwortet.`;
+            document.getElementById("question").innerText = resultMessage;
+
+            // Display motivational messages in German
+            const motivationalMessages = [
+                "Großartige Leistung! Mach weiter so!",
+                "Jedes Quiz ist eine Gelegenheit zum Lernen. Mach weiter!",
+                "Erfolg ist nicht endgültig, Misserfolg ist nicht fatal: Es zählt der Mut, weiterzumachen.",
+                "Glauben Sie daran, dass Sie können, und Sie sind bereits auf halbem Weg dort.",
+                "Sie machen mit jeder Frage Fortschritte. Bleiben Sie dran!",
+                "Denken Sie daran, der einzige Weg zum Erfolg ist, niemals aufzugeben!",
+                "Fehler sind der Beweis dafür, dass Sie es versuchen. Machen Sie weiter!"
+            ];
+            const randomMessageIndex = Math.floor(Math.random() * motivationalMessages.length);
+            const randomMessage = motivationalMessages[randomMessageIndex];
+            document.getElementById("feedback").innerText = randomMessage;
+
+            // Display "Take Quiz Again" button
+            const retakeButton = document.createElement('button');
+            retakeButton.innerText = "Quiz erneut starten";
+            retakeButton.addEventListener('click', function() {
+                resetQuiz();
+            });
+            document.getElementById("options").appendChild(retakeButton);
+        }
+    </script>
+
+    <script>
+    // Existing code...
+
+    // Add event listener for "Enter" key press
+    document.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            submitButton.click(); // Trigger click event of submit button
+        }
+    });
+    </script>
+</body>
+</html>
